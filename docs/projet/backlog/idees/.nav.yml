@@ -1,0 +1,5 @@
+title: Idées
+nav:
+  - priorites.md
+  - glob: "*"
+    ignore_no_matches: true

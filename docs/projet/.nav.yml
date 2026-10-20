@@ -1,0 +1,9 @@
+title: Projet
+nav:
+  - index.md
+  - roadmap.md
+  - todo.md
+  - backlog
+  - finances
+  - glob: "*"
+    ignore_no_matches: true

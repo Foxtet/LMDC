@@ -1,0 +1,7 @@
+title: Réseau
+nav:
+  - vlans.md
+  - flux.md
+  - ipam.md
+  - glob: "*"
+    ignore_no_matches: true
