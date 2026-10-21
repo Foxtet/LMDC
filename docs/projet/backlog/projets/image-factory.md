@@ -1,2 +1,0 @@
-# Image Factory générique
-

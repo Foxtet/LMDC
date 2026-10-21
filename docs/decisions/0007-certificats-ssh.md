@@ -1,4 +1,7 @@
-# Certificats SSH
+# 0007. Certificats SSH
+
+- **Date** : 2026-03
+- **Statut** : proposé
 
 Les clés SSH sont de natures complexe à gérer, elles n'ont pas de durées limites de vie, peuvent être volées, et la vérification du host (le serveur auquel on se connecte) n'est pas native.
 Les certificats SSH permettent de gérer ce problème, et Step-CA (la PKI de cette infrastructure) gère les certificats SSH.

@@ -1,7 +1,9 @@
-# Unification des switchs
+# 0002. Unification des switchs
 
-## Idée
+- **Date** : 2026 (date non notée)
+- **Statut** : accepté
 
+## Contexte
 
 Afin de réduire la complexité de l'infrastructure niveau management. Un point critique a été identifié:
 

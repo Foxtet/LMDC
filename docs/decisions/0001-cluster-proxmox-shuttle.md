@@ -1,8 +1,7 @@
-# Évolution du cluster Proxmox
+# 0001. Remplacement des OptiPlex par des Shuttle
 
-## Timestamp
-
-08/01/2026
+- **Date** : 2026-01-08
+- **Statut** : accepté
 
 ## Actions
 

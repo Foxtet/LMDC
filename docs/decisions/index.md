@@ -2,10 +2,8 @@
 
 La documentation décisionnelle (ADR) : pour chaque outil ou choix d'architecture, le contexte, la décision prise et ses conséquences.
 
-## Pages
+Chaque décision est numérotée dans l'ordre où elle a été prise et porte un statut :
 
-- [Certificats SSH](certificats-ssh.md)
-- [Gestion de l'IaC](gestion-iac.md)
-- [Module deploy-vm](module-deploy-vm.md)
-- [Vaults OpenBao](openbao-vaults.md)
-- [Catalogue CI/CD](catalogue-ci-cd.md)
+- **proposé** : la décision est envisagée mais pas encore appliquée ;
+- **accepté** : la décision est appliquée ;
+- **remplacé par NNNN** : une décision plus récente l'a remplacée (la page reste pour l'historique).

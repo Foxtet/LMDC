@@ -28,6 +28,16 @@
 - Livrables vérifiables [01_VLANS](../architecture/reseau/vlans.md), [02_Matrice_de_flux_inter-VLAN](../architecture/reseau/flux.md), [03_IPAM](../architecture/reseau/ipam.md). 
 
 **Dépendance:** Aucune.
+
+**Statut :** en cours (3/4 tâches).
+
+**Tâches :**
+
+- [x] Plan d'adressage documenté.
+- [x] VLANS.
+- [x] Flux Inter-VLAN.
+- [ ] [EN RÉFLEXION] Règles pare feu.
+
 ### 1.1 Installation des équipements réseaux
 
 **Objectif:** Cette partie contient la listes des équipements réseau à installer.
@@ -37,6 +47,14 @@
 - Chacun des équipements est atteignable sur le réseau.
 
 **Dépendance:** Aucune.
+
+**Statut :** en cours (1/3 tâches).
+
+**Tâches :**
+
+- [ ] Routeur Protectli OPNsense.
+- [ ] Switch 1GbE Netgear.
+- [x] Point d'accès Ubiquiti.
 
 ### 1.2 Paramétrage des équipements réseau
 
@@ -56,6 +74,23 @@
 - [1.0 Réseau Théorique](#10-reseau-theorique) 
 - [1.1 Installation des équipements réseaux](#11-installation-des-equipements-reseaux)
 
+**Statut :** à faire (0/7 tâches).
+
+**Tâches :**
+
+**OPNsense**
+
+- [ ] Définition de l'IP.
+- [ ] Définition des VLANS et leur communications, documentations visible ici [01_VLANS](../architecture/reseau/vlans.md), [02_Matrice_de_flux_inter-VLAN](../architecture/reseau/flux.md).
+- [ ] Règles de pare-feu IPv4.
+- [ ] Règles de redirections IPv4.
+- [ ] [EN RÉFLEXION] paramétrage supplémentaire.
+
+**Switchs et Point d'accès**
+
+- [ ] Définition de l'IP fixe.
+- [ ] Tagging de VLANS.
+
 ## Phase 2: Infrastructure critique
 
 **Objectif final:** Définir et mettre en production une infrastructure critique, elle doit toujours être up, être en HA ou avoir un failsafe.
@@ -74,6 +109,23 @@
 
 **Dépendance:** Hyperviseur Proxmox en ligne.
 
+**Statut :** en cours (3/7 tâches).
+
+**Tâches :**
+
+**DNS**
+
+- [x] Création de la Zone `int.lavaduck.net`.
+- [x] Installation d'SQLite pour les logs.
+- [x] Mise en place des liste de bloqueurs de pubs les plus connues (Multi PRO ++).
+- [ ] [EN RÉFLEXION] création de la zone upstream/stub `lavaduck.net` ?
+
+**DHCP**
+
+- [ ] Définition des réservation des baux statiques.
+- [ ] Création de la zone dynamique pour le VLAN Guest.
+- [ ] Distribution de la Gateway et DNS dans le DHCP.
+
 ### 2.1 PKI (Step-CA)
 
 **Objectif:** Disposer d'une entité de certification permettant de sécuriser les connexions internes.
@@ -87,6 +139,15 @@
 - Root CA stockée offline sur support chiffré, hors du LXC Step-CA.
 
 **Dépendance:** Hyperviseur Proxmox en ligne.
+
+**Statut :** en cours (3/4 tâches).
+
+**Tâches :**
+
+- [x] Création de l'autorité de certification.
+- [ ] Sécurisation du Root CA key dans une clé USB chiffrée.
+- [x] Activation du serveur ACME.
+- [x] Définition d'une entrée A spécifique dans Technitium DNS pour pointer sur Step-CA.
 
 ### 2.2 Reverse Proxy (Traefik)
 
@@ -107,6 +168,16 @@
 - [2.0 DNS + DHCP (Technitium)](#20-dns-dhcp-technitium)
 - [2.1 PKI (Step-CA)](#21-pki-step-ca) 
 
+**Statut :** terminé (5/5 tâches).
+
+**Tâches :**
+
+- [x] Déploiement de Traefik sur Docker.
+- [x] Mise en place du Resolver DNS-01 Cloudflare.
+- [x] Création d'une clé API sur Technitium DNS pour les entrées TXT.
+- [x] Mise en place du Resolver DNS-01 Step-CA.
+- [x] Création des fichiers dynamiques.
+
 ### 2.3 IdP (Zitadel)
 
 **Objectif:** Avoir un IdP sécurisant les connexion via protocole OIDC quand c'est possible.
@@ -120,6 +191,15 @@
 - L'endpoint `.well-known/openid-configuration` répond.
 
 **Dépendance:** Hyperviseur Proxmox en ligne.
+
+**Statut :** terminé (4/4 tâches).
+
+**Tâches :**
+
+- [x] Déploiement de Zitadel sur Docker.
+- [x] Création des Projets.
+- [x] Mise en place d'un compte Resend pour les invitations mails via Cloudflare.
+- [x] Invitation des utilisateurs.
 
 ### 2.4 VPN (Netbird)
 
@@ -141,6 +221,18 @@
 - [2.0 DNS + DHCP (Technitium)](#20-dns-dhcp-technitium)
 - [2.3 IdP (Zitadel)](#23-idp-zitadel)
 
+**Statut :** terminé (7/7 tâches).
+
+**Tâches :**
+
+- [x] Déploiement de Netbird sur Docker.
+- [x] Ajout de la connexion OIDC avec Zitadel.
+- [x] Acivation du champ "groups" du JWT Zitadel.
+- [x] Création d'un Network avec adresse du réseau (.0) pour l'accès admin.
+- [x] Création d'un Network avec accès aux PVE (x.x.x.x/32) pour accès homelab pour projet groupe.
+- [x] Mise en place du Nameserver redirigeant au Serveur DNS.
+- [x] Invitation des utilisateurs.
+
 ### 2.5 Secret Manager (OpenBao)
 
 **Objectif:** Disposer d'un serveur de gestion de secret sécurisé afin de pouvoir y ranger les informations sensibles.
@@ -159,6 +251,15 @@
 - Hyperviseur Proxmox en ligne.
 - [2.0 DNS + DHCP (Technitium)](#20-dns-dhcp-technitium)
 - [2.3 IdP (Zitadel)](#23-idp-zitadel)
+
+**Statut :** en cours (2/3 tâches).
+
+**Tâches :**
+
+- [x] Déploiement d'OpenBao.
+- [x] Ajout de la connexion OIDC avec Zitadel
+- [ ] [EN RÉFLEXION]
+
 ## Phase 3: Infrastructure non critique
 
 **Objectif final:** La phase 3 consiste à la mise en place des éléments du cluster qui ne sont pas indispensable à son démarrage. Comme des outils d'inventoring et SCM.
@@ -181,6 +282,15 @@
 - Zitadel en ligne.
 - Traefik en ligne.
 
+**Statut :** terminé (4/4 tâches).
+
+**Tâches :**
+
+- [x] Déploiement de Gitlab Omnibus.
+- [x] Optimisation de la consommation des ressources de Gitlab dans le fichier `/etc/gitlab/gitlab.rb`.
+- [x] Création des groupes, sous groupes et projets.
+- [x] Setup de la clé SSH.
+
 ### 3.1 CI/CD (Gitlab Runner)
 
 **Objectif:** Avoir en place un runner d'instance avec executor Gitlab afin de pouvoir créer des CI/CD.
@@ -196,6 +306,15 @@
 - Hyperviseur Proxmox en ligne.
 - Gitlab en ligne.
 - Traefik en ligne.
+
+**Statut :** terminé (3/3 tâches).
+
+**Tâches :**
+
+- [x] Installation du dépôt de gitlab runner.
+- [x] Installation de Docker.
+- [x] Connexion à Gitlab.
+
 ### 3.2 Sémaphore [EN RÉFLEXION]
 
 **Objectif:** Disposer d'une machine avec UI et API dédiée à l'orchestration des outils Terraform, Ansible et Packer.
@@ -218,6 +337,12 @@
 - Traefik en ligne.
 - Technitium (résolution DNS côté client)
 
+**Statut :** à faire (0/1 tâches).
+
+**Tâches :**
+
+- [ ] [EN RÉFLEXION, SOFTWARE INCONNU]
+
 ### 3.3 DCIM/IPAM (Netbox)
 
 **Objectif:** Avoir une inventorisation complète du parc informatique de la maison, avec un supplément sur le référencement de l'IPAM comme seule source de vérité.
@@ -234,6 +359,13 @@
 - Zitadel en ligne.
 - Traefik en ligne.
 - Technitium (résolution DNS côté client)
+
+**Statut :** en cours (1/2 tâches).
+
+**Tâches :**
+
+- [x] Déploiement de Netbox.
+- [ ] [EN RÉFLEXION, SOFTWARE INCONNU]
 
 ### 3.4 Unifi Controller
 
@@ -252,6 +384,13 @@
 - Traefik en ligne.
 - Technitium (résolution DNS côté client)
 
+**Statut :** terminé (2/2 tâches).
+
+**Tâches :**
+
+- [x] Déploiement du contrôleur.
+- [x] Initialisation du point d'accès.
+
 ## Phase 4: Automatisation et IaC
 
 **Objectif final:** Avoir une infrastructure immuable et automatisée, gérée par code conformément aux principes GitOps.
@@ -267,6 +406,14 @@
 **Dépendance:** 
 
 - Gitlab en ligne.
+
+**Statut :** à faire (0/2 tâches).
+
+**Tâches :**
+
+- [ ] Mise en place d'un projet de templatisation LXC.
+- [ ] Mise en place d'un projet de templatisation VM OS wide.
+
 ### 4.1 Créations des comptes (Cloud-Init)
 
 **Objectif:** Injecter les informations lors du déploiement Terraform/OpenTofu (IP, Hostname, Clé SSH, Users, compte de service, ...)
@@ -278,6 +425,13 @@
 **Dépendance:** 
 
 - Gitlab en ligne.
+
+**Statut :** à faire (0/1 tâches).
+
+**Tâches :**
+
+- [ ] [EN RÉFLEXION, SOFTWARE INCONNU]
+
 ### 4.2 Provisionnement (Terraform/OpenTofu)
 
 **Objectif:** Déployer des VM et LXC prod ready à partir des templates Packer généré, le but définitif est de moins possible toucher à l'UI Proxmox.
@@ -291,6 +445,14 @@
 **Dépendance:** 
 
 - Gitlab en ligne.
+
+**Statut :** à faire (0/2 tâches).
+
+**Tâches :**
+
+- [ ] Mise en place d'un projet de déploiement de template LXC.
+- [ ] Mise en place d'un projet de déploiement de template VM OS wide.
+
 ### 4.3 Configuration post install (Ansible)
 
 **Objectif:** Préparer des playbooks divers permettant de gérer la configuration des machines (mise à jour, installation de paquets, ...)
@@ -304,8 +466,12 @@
 
 - Gitlab.
 
+**Statut :** à faire (0/1 tâches).
+
+**Tâches :**
+
+- [ ] [EN RÉFLEXION SUR LES PLAYBOOKS À CRÉER]
+
 ## Phase 5: Mise en HA du Cluster Proxmox
 ## Phase 6: Kubernetes
 ## Phase 7: Workload applicatif
-
-

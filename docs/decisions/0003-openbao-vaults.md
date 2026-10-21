@@ -1,4 +1,7 @@
-# Vaults OpenBao
+# 0003. Vaults OpenBao
+
+- **Date** : 2026-02-21
+- **Statut** : accepté
 
 Création de 4 vaults type Key Value (KV) séparés:
 
