@@ -1,4 +1,7 @@
-# Gestion de l'IaC
+# 0006. Gestion de l'IaC
+
+- **Date** : 2026-03-02
+- **Statut** : accepté (le backend du state reste à mettre en place)
 
 ## Architecture Gitlab
 

@@ -16,7 +16,7 @@ docs/
 ├── architecture/   # matériel, réseau, nommage
 ├── decisions/      # ADR
 ├── exploitation/   # runbooks, incidents, évolutions, troubleshooting
-├── projet/         # roadmap, todo, backlog, finances
+├── projet/         # roadmap, backlog, finances
 ├── journal/        # suivi des actions (blog)
 └── assets/images/
 ```
@@ -36,8 +36,8 @@ Ouvrir la **racine du dépôt** comme vault, puis régler :
 
 Créer une note dans `docs/journal/posts/` applique alors le modèle journal et
 renomme le fichier à la date du jour (`AAAA-MM-JJ.md`). Créer une note dans
-`docs/decisions/` demande le titre de la décision et nomme le fichier à partir
-de ce titre.
+`docs/decisions/` demande le titre de la décision et nomme le fichier avec le
+numéro suivant et ce titre (`0008-mon-titre.md`).
 
 Le dossier `templates/` est hors de `docs/`, il n'est donc pas publié.
 

@@ -16,7 +16,7 @@ Il a pour objectif de répliquer au mieux ce qu'on pourrait retrouver dans une (
 | [Architecture](architecture/index.md) | Matériel, réseau (VLAN, flux, IPAM), conventions de nommage |
 | [Décisions](decisions/index.md) | Les ADR : pourquoi chaque choix technique a été fait |
 | [Exploitation](exploitation/index.md) | Runbooks, incidents, évolutions et troubleshooting |
-| [Projet](projet/index.md) | Roadmap, todo, backlog d'idées et de projets, finances |
+| [Projet](projet/index.md) | Roadmap et tâches, backlog d'idées et de projets, finances |
 | [Journal](journal/index.md) | Le suivi des actions effectuées dans le lab, au fil du temps |
 
 Le code d'infrastructure (Packer, OpenTofu, Ansible) vit dans des dépôts séparés ; ce site documente l'architecture et les décisions, et renvoie vers la documentation de référence du code.
